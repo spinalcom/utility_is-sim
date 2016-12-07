@@ -1,1 +1,5 @@
-config.js
+.gen
+gen
+processes.js
+stylesheets.css
+bin/concat_js.pyc
