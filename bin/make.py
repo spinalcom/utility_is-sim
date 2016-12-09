@@ -1,3 +1,5 @@
+#!/usr/bin/python2
+
 from concat_js import *
 
 processes = []
@@ -13,16 +15,19 @@ for p in os.listdir( "modules" ):
             stylesheets.append("gen/" + m + "/" + p + ".css")
             concat_js( "modules/" + p + "/" + m, "gen/" + m + "/" + p + ".js", "gen/stylesheets/" + p + ".css" )
 
-exec_cmd( "echo > processes.js " )
-exec_cmd( "echo > stylesheets.css " )
+exec_cmd_silent( "echo > processes.js " )
+exec_cmd_silent( "echo > stylesheets.css " )
 
+print ("\033[0;35mConcat file : processes.js\033[m");
 for v in sorted(processes):
-    exec_cmd( "cat processes.js " + v + " > processes_tmp.js" )
-    exec_cmd( "mv processes_tmp.js processes.js" )
+    exec_cmd_silent( "cat processes.js " + v + " > processes_tmp.js" )
+    exec_cmd_silent( "mv processes_tmp.js processes.js" )
+print ("\033[0;35mConcat file : stylesheets.css\033[m");
 for s in sorted(stylesheets):
-    exec_cmd( "cat stylesheets.css " + s + " > stylesheets_tmp.css" )
-    exec_cmd( "mv stylesheets_tmp.css stylesheets.css" )
+    exec_cmd_silent( "cat stylesheets.css " + s + " > stylesheets_tmp.css" )
+    exec_cmd_silent( "mv stylesheets_tmp.css stylesheets.css" )
 
-exec_cmd( "cp modules/Admin/admin.html ../" )
-exec_cmd( "cp modules/Desk/desk.html ../" )
-exec_cmd( "cp modules/Lab/lab.html ../" )
+print ("\033[0;35mCopy html files in html folder\033[m");
+exec_cmd_silent( "cp modules/Admin/admin.html ../" )
+exec_cmd_silent( "cp modules/Desk/desk.html ../" )
+exec_cmd_silent( "cp modules/Lab/lab.html ../" )

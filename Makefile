@@ -1,7 +1,7 @@
 
-
 all:
-	python	bin/make.py
+	@echo "compiling utility_is-sim..."
+	@python	bin/make.py
 
 clean:
-	rm -r gen/; rm -r .gen/; rm models.js; rm processes.js; rm stylesheets.css
+	@! test -e gen || rm -rf gen/ .gen/ models.js processes.js stylesheets.css

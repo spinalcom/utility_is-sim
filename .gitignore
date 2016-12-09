@@ -1,5 +1,6 @@
 .gen
 gen
+models.js
 processes.js
 stylesheets.css
 bin/concat_js.pyc
