@@ -30,3 +30,4 @@ for s in sorted(stylesheets):
 print ("\033[0;35mCopy html files in html folder\033[m");
 exec_cmd_silent( "cp modules/Admin/admin.html ../" )
 exec_cmd_silent( "cp modules/Desk/desk.html ../" )
+exec_cmd_silent( "cp modules/Lab/lab.html ../" )
