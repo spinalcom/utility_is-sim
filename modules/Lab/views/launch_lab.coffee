@@ -1,6 +1,7 @@
 #clear page
 MAIN_DIV = document.body
 USER = {}
+HOME_DIR=""
 clear_page = ->
     while MAIN_DIV.firstChild?
         MAIN_DIV.removeChild MAIN_DIV.firstChild
@@ -29,6 +30,7 @@ get_user_local = ()->
 
 
 load_if_cookie_lab = () ->
+
   get_user_local();
   if (!config.user || !config.password)
     window.location = "login-dashboard.html";

@@ -8,17 +8,21 @@ if (typeof(LIBS) == "undefined") {
   var LIBS = [];
 }
 
-// var HOME_DIR = '__users__/root'
-// var USER = {
-//   userid: '168',
-//   password: 'JHGgcz45JKilmzknzelf65ddDadggftIO98P'
-// };
+function array_unique(arr) {
+  var result = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (result.indexOf(arr[i]) == -1) {
+      result.push(arr[i]);
+    }
+  }
+  return result;
+}
 
-var HOME_DIR = '__users__/user'
-var USER = {
-  userid: '1657',
-  password: 'LQv2nm9G2rqMerk23Tav2ufeuRM2K5RG'
-};
+APPLIS = array_unique(APPLIS);
+console.log(APPLIS)
+MODELS = array_unique(MODELS);
+LIBS = array_unique(LIBS);
+
 var config = {
   host: '127.0.0.1',
   user_port: '8888',
