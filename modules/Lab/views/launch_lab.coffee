@@ -108,8 +108,8 @@ launch_lab = ( main = document.body ) ->
                     app = new TreeApp main, td
 
                     # visualisation
-                    fs.load_or_make_dir "/sessions/" + fs._session_num, ( session_dir, err ) ->
-                        session_dir.add_file "server_assisted_visualization", new ServerAssistedVisualization app, bs
+                    # fs.load_or_make_dir "/sessions/" + fs._session_num, ( session_dir, err ) ->
+                    #     session_dir.add_file "server_assisted_visualization", new ServerAssistedVisualization app, bs
 
         # else, return to desk
         else
