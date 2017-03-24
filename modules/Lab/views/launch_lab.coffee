@@ -92,7 +92,7 @@ launch_lab = ( main = document.body ) ->
           if not config_file?
             config  = new DeskConfig
             current_dir.add_file ".config", config, model_type: "Config"
-            login_bar = new login_bar main, config
+            login_bar = new LoginBar main, config
           else
             config_file.load ( config, err ) =>
               login_bar = new LoginBar main, config
