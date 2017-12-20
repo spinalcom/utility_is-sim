@@ -94,16 +94,37 @@ launch_lab = ( main = document.body ) ->
             current_dir.add_file ".config", config, model_type: "Config"
             login_bar = new LoginBar main, config
           else
-            config_file.load ( config, err ) =>
+            config_file.load ( config, err ) ->
               login_bar = new LoginBar main, config
 
         hash = bs.location.hash.get()
         # something to reload ?
         if hash.length > 1
-            path = decodeURIComponent hash.slice 1
+            hash = hash.slice 1
+            path = decodeURIComponent hash
             fs.load path, ( td, err ) ->
                 if err
-                    window.location = "#"
+                    # window.location = "#"
+                    # test if file exists
+                    dir_path = hash.replace(/\/[^\/]+$/, '')
+                    fs.load dir_path, ( _td, _err ) ->
+                        if _err
+                            window.location = "#"
+                        else
+                            nameArray = hash.split('/')
+                            filename = nameArray[nameArray.length - 1]
+                            file = _td.find(filename)
+                            if file
+                                tap = new TreeAppData
+                                tap.new_session()
+                                tap.modules.push new TreeAppModule_UndoManager
+                                tap.modules.push new TreeAppModule_PanelManager
+                                tap.modules.push new TreeAppModule_File
+                                tap.modules.push new TreeAppModule_Apps
+                                tap.modules.push new TreeAppModule_Animation
+                                tap.modules.push new TreeAppModule_TreeView
+                                file._ptr.set(tap)
+                                app = new TreeApp main, tap
                 else
                     app = new TreeApp main, td
 
