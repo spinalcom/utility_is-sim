@@ -1,49 +1,50 @@
 #clear page
 MAIN_DIV = document.body
 USER = {}
-HOME_DIR=""
+HOME_DIR = ""
 clear_page = ->
     while MAIN_DIV.firstChild?
         MAIN_DIV.removeChild MAIN_DIV.firstChild
 
-disconnect = (error)->
+disconnect = (error) ->
   if config.user
-    delete config.user;
+    delete config.user
   if config.password
-    delete config.password;
-  localStorage.removeItem('spinal_user_connect');
+    delete config.password
+  localStorage.removeItem('spinal_user_connect')
   if error
-    window.location = "login-dashboard.html#error";
+    window.location = "login-dashboard.html#error"
   else
-    window.location = "login-dashboard.html";
+    window.location = "login-dashboard.html"
 
-get_user_local = ()->
-  user_str;
+get_user_local = () ->
+  user_str
   if (parseInt(window.location.port) == parseInt(config.admin_port))
-    user_str = localStorage.getItem('spinal_user_connect');
+    user_str = localStorage.getItem('spinal_user_connect')
   else
-    user_str = localStorage.getItem('spinal_connect');
+    user_str = localStorage.getItem('spinal_connect')
   if (user_str)
-    user = JSON.parse(user_str);
-    config.user = user.user;
-    config.password = user.password;
+    user = JSON.parse(user_str)
+    config.user = user.user
+    config.password = user.password
 
 
 load_if_cookie_lab = () ->
 
-  get_user_local();
+  get_user_local()
   if (!config.user || !config.password)
-    window.location = "login-dashboard.html";
+    window.location = "login-dashboard.html"
   else
-    SpinalUserManager.get_user_id("http://" + config.host + ":" + config.user_port + "/", config.user, config.password, (response)=>
-      config.user_id = parseInt(response);
+    SpinalUserManager.get_user_id("http://" + config.host + ":" + config.user_port +
+     "/", config.user, config.password, (response) ->
+      config.user_id = parseInt(response)
       HOME_DIR = "__users__/#{config.user}"
       USER.userid = config.user_id
       USER.password = config.password
-      launch_lab();
-    , (err)->
-      disconnect();
-    );
+      launch_lab()
+    , (err) ->
+      disconnect()
+    )
 
     # if Cookies.set("email") and Cookies.set("password")
     #     email = Cookies.set("email")
@@ -91,7 +92,7 @@ launch_lab = ( main = document.body ) ->
           config_file = current_dir.detect ( x ) -> x.name.get() == ".config"
           if not config_file?
             config  = new DeskConfig
-            current_dir.add_file ".config", config, model_type: "Config"
+            current_dir.add_file ".config", config, { model_type: "Config" }
             login_bar = new LoginBar main, config
           else
             config_file.load ( config, err ) ->
@@ -106,7 +107,7 @@ launch_lab = ( main = document.body ) ->
                 if err
                     # window.location = "#"
                     # test if file exists
-                    dir_path = hash.replace(/\/[^\/]+$/, '')
+                    dir_path = decodeURIComponent hash.replace(/\/[^\/]+$/, '')
                     fs.load dir_path, ( _td, _err ) ->
                         if _err
                             window.location = "#"
